@@ -4,6 +4,7 @@ import './globals.css';
 
 import Navbar from './Navbar';
 import { Providers } from './providers';
+import Footer from './Footer';
 
 // const geistSans = Geist({
 //   variable: '--font-geist-sans',
@@ -34,12 +35,13 @@ export default function RootLayout({
   return (
     <html lang='en' className='dark'>
       <body className={`${bebas_neue.variable} antialiased`}>
-        <main>
-          <Providers>
+        <Providers>
+          <div className='container max-w-screen-xl mx-auto flex flex-col min-h-screen'>
             <Navbar />
-            {children}
-          </Providers>
-        </main>
+            <main>{children}</main>
+            <Footer />
+          </div>
+        </Providers>
       </body>
     </html>
   );
