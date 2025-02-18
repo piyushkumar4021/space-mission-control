@@ -3,7 +3,7 @@ import { Bebas_Neue } from 'next/font/google';
 import './globals.css';
 
 import Navbar from './Navbar';
-import { Providers } from './providers';
+import { Providers } from './HeroUIProvider';
 import Footer from './Footer';
 
 // const geistSans = Geist({
