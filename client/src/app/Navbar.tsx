@@ -1,18 +1,9 @@
 'use client';
 import { FaRocket } from 'react-icons/fa6';
-import { useState } from 'react';
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
-  Link,
-  Divider,
-} from '@heroui/react';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import clsx from 'clsx';
+import Divider from '../components/divider';
 
 const links = [
   { label: 'Launch', href: '/launch' },
@@ -21,55 +12,36 @@ const links = [
 ];
 
 export default function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+  console.log(pathname);
 
   return (
     <>
-      <Navbar onMenuOpenChange={setIsMenuOpen} maxWidth='full'>
-        <NavbarContent>
-          <NavbarBrand>
-            <FaRocket size={20} />
-            <p className='font-bebas_neue tracking-wider text-xl ml-3 text-inherit'>
-              SPACE MISSION CONTROL
-            </p>
-          </NavbarBrand>
-        </NavbarContent>
+      <div className='flex justify-between py-4 text-white'>
+        <Link href='/launch' className='flex items-center gap-x-3'>
+          <FaRocket size={20} />
+          <p className='font-bebas_neue tracking-wider text-xl'>
+            SPACE MISSION CONTROL
+          </p>
+        </Link>
 
-        <NavbarContent className='hidden sm:flex gap-8' justify='end'>
+        <nav className='hidden sm:flex gap-8'>
           {links.map(({ href, label }) => (
-            <NavbarItem key={href}>
-              <Link
-                color={pathname === href ? 'primary' : 'foreground'}
-                href={href}
-              >
-                {label}
-              </Link>
-            </NavbarItem>
+            <Link
+              key={href}
+              className={clsx({
+                'font-semibold text-blue-600 border-blue-600 border-b-2':
+                  pathname === href,
+              })}
+              href={href}
+            >
+              {label}
+            </Link>
           ))}
-        </NavbarContent>
+        </nav>
+      </div>
 
-        <NavbarContent className='flex sm:hidden' justify='end'>
-          <NavbarMenuToggle
-            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-            className='sm:hidden'
-          />
-        </NavbarContent>
-
-        <NavbarMenu>
-          {links.map(({ href, label }) => (
-            <NavbarMenuItem key={href}>
-              <Link
-                color={pathname === href ? 'primary' : 'foreground'}
-                href={href}
-              >
-                {label}
-              </Link>
-            </NavbarMenuItem>
-          ))}
-        </NavbarMenu>
-      </Navbar>
-      <Divider className='mb-5' />
+      <Divider />
     </>
   );
 }

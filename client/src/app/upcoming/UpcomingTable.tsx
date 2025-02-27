@@ -1,16 +1,13 @@
-'use client';
-
+import { IoClose as XIcon } from 'react-icons/io5';
 import {
   Table,
-  TableHeader,
-  TableColumn,
   TableBody,
-  TableRow,
+  TableCaption,
   TableCell,
-  getKeyValue,
-  Button,
-} from '@heroui/react';
-import { TfiClose } from 'react-icons/tfi';
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '../../components/ui/table';
 
 const rows = [
   {
@@ -38,57 +35,50 @@ const rows = [
 
 const columns = [
   {
-    key: 'id',
-    label: 'ID',
+    value: 'id',
+    name: 'ID',
   },
   {
-    key: 'date',
-    label: 'Date',
+    value: 'date',
+    name: 'Date',
   },
   {
-    key: 'mission',
-    label: 'Mission',
+    value: 'mission',
+    name: 'Mission',
   },
   {
-    key: 'rocket',
-    label: 'Rocket',
+    value: 'rocket',
+    name: 'Rocket',
   },
   {
-    key: 'destination',
-    label: 'Destination',
+    value: 'destination',
+    name: 'Destination',
   },
 ];
 
 export default function UpcomingTable() {
   return (
-    <Table aria-label='Table with dynamic content'>
-      <TableHeader columns={columns}>
-        {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
+    <Table className='my-5'>
+      <TableCaption>A list of your recent rocket launches.</TableCaption>
+      <TableHeader>
+        <TableRow>
+          {columns.map((col) => (
+            <TableHead key={col.value}>{col.name}</TableHead>
+          ))}
+          <TableHead className='w-10' />
+        </TableRow>
       </TableHeader>
-
-      <TableBody items={rows}>
-        {(item) => (
-          <TableRow key={item.id}>
-            {(columnKey) => (
-              <TableCell>
-                <div className='flex items-center'>
-                  {getKeyValue(item, columnKey)}
-                  {columnKey === 'destination' && (
-                    <Button
-                      isIconOnly
-                      className='ml-auto'
-                      variant='light'
-                      size='sm'
-                      color='danger'
-                    >
-                      <TfiClose />
-                    </Button>
-                  )}
-                </div>
-              </TableCell>
-            )}
+      <TableBody>
+        {rows.map((row) => (
+          <TableRow key={row.id}>
+            {columns.map((col) => (
+              <TableCell key={col.value}>{row[col.value]}</TableCell>
+            ))}
+            <TableCell className='flex justify-center items-center'>
+              <XIcon className='w-7 h-7 text-red-500 hover:bg-red-400/20 p-0.5 rounded cursor-pointer' />
+            </TableCell>
           </TableRow>
-        )}
+        ))}
       </TableBody>
     </Table>
   );

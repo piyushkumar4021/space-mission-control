@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import { Bebas_Neue } from 'next/font/google';
 import './globals.css';
 
-import Navbar from './Navbar';
-import { Providers } from './HeroUIProvider';
-import Footer from './Footer';
+import Navbar from './navbar';
+import Footer from './footer';
+import Background from '../components/background';
 
 // const geistSans = Geist({
 //   variable: '--font-geist-sans',
@@ -33,15 +33,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' className='dark'>
+    <html lang='en'>
       <body className={`${bebas_neue.variable} antialiased`}>
-        <Providers>
-          <div className='container max-w-screen-xl mx-auto flex flex-col min-h-screen'>
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
-          </div>
-        </Providers>
+        <Background />
+        <div className='container max-w-screen-xl mx-auto flex flex-col min-h-screen'>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

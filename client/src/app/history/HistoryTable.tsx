@@ -1,13 +1,12 @@
-'use client';
 import {
   Table,
-  TableHeader,
-  TableColumn,
   TableBody,
-  TableRow,
+  TableCaption,
   TableCell,
-  getKeyValue,
-} from '@heroui/react';
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '../../components/ui/table';
 
 const rows = [
   {
@@ -35,41 +34,46 @@ const rows = [
 
 const columns = [
   {
-    key: 'id',
-    label: 'ID',
+    value: 'id',
+    name: 'ID',
   },
   {
-    key: 'date',
-    label: 'Date',
+    value: 'date',
+    name: 'Date',
   },
   {
-    key: 'mission',
-    label: 'Mission',
+    value: 'mission',
+    name: 'Mission',
   },
   {
-    key: 'rocket',
-    label: 'Rocket',
+    value: 'rocket',
+    name: 'Rocket',
   },
   {
-    key: 'customers',
-    label: 'Customers',
+    value: 'customers',
+    name: 'Customers',
   },
 ];
 
-export default function App() {
+export default function HistoryTable() {
   return (
-    <Table aria-label='Example table with dynamic content'>
-      <TableHeader columns={columns}>
-        {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
+    <Table className='my-5'>
+      <TableCaption>A list of your previous rocket launches.</TableCaption>
+      <TableHeader>
+        <TableRow>
+          {columns.map((col) => (
+            <TableHead key={col.value}>{col.name}</TableHead>
+          ))}
+        </TableRow>
       </TableHeader>
-      <TableBody items={rows}>
-        {(item) => (
-          <TableRow key={item.id}>
-            {(columnKey) => (
-              <TableCell>{getKeyValue(item, columnKey)}</TableCell>
-            )}
+      <TableBody>
+        {rows.map((row) => (
+          <TableRow key={row.id}>
+            {columns.map((col) => (
+              <TableCell key={col.value}>{row[col.value]}</TableCell>
+            ))}
           </TableRow>
-        )}
+        ))}
       </TableBody>
     </Table>
   );

@@ -1,23 +1,18 @@
-import { Card, CardHeader, CardBody } from '@heroui/react';
-import H2 from '../../components/H2';
-import HistoryTable from './HistoryTable';
+import H2 from '../../components/h2';
+import Section from '../../components/section';
+import HistoryTable from './historyTable';
 
 export default function HistoryPage() {
   return (
-    <section className='px-3 mb-5'>
-      <Card className='max-w-screen-lg mx-auto sm:p-4'>
-        <CardHeader>
-          <H2>Previous Launched Rockets</H2>
-        </CardHeader>
-        <CardBody>
-          <p className='mb-4'>
-            History of mission launches including SpaceX launches starting from
-            the year 2006.
-          </p>
+    <Section>
+      <H2>Previous Launched Rockets</H2>
 
-          <HistoryTable />
-        </CardBody>
-      </Card>
-    </section>
+      <p>
+        History of mission launches including SpaceX launches starting from the
+        year 2006.
+      </p>
+
+      <HistoryTable />
+    </Section>
   );
 }
